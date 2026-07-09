@@ -4,13 +4,14 @@ import com.codeborne.selenide.ScrollIntoViewOptions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
+import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
-public class FormAndTextBoxTests extends TestBase {
+public class FormTests extends TestBase {
 
     @Test
-    void successfulFillAllFieldsComplicatedFormTest() {
+    void successfulFillAllFieldsFormTest() {
         open("/automation-practice-form");
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("Black");
@@ -28,7 +29,7 @@ public class FormAndTextBoxTests extends TestBase {
         $("#react-select-3-option-0").click();
         $("#city svg").click();
         $("#react-select-4-option-0").click();
-        $("[id=submit]").click();
+        $("#submit").click();
 
         $x("//div[@class='table-responsive']//tbody//tr[1]/td[2]").shouldHave(text("Alex Black"));
         $x("//div[@class='table-responsive']//tbody//tr[2]/td[2]").shouldHave(text("alex@black.com"));
@@ -42,7 +43,7 @@ public class FormAndTextBoxTests extends TestBase {
     }
 
     @Test
-    void successfulFillRequiredFieldsComplicatedFormTest() {
+    void successfulFillRequiredFieldsCFormTest() {
         open("/automation-practice-form");
         $("#firstName").setValue("Ryan");
         $("#lastName").setValue("Gosling");
@@ -52,8 +53,8 @@ public class FormAndTextBoxTests extends TestBase {
         $("#dateOfBirthInput").click();
         $("#dateOfBirthInput").sendKeys(Keys.CONTROL + "a");
         $("#dateOfBirthInput").sendKeys("12 Nov 1980");
-        $("[id=submit]").scrollIntoView(ScrollIntoViewOptions.instant());
-        $("[id=submit]").click();
+        $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
+        $("#submit").click();
 
         $x("//div[@class='table-responsive']//tbody//tr[1]/td[2]").shouldHave(text("Ryan Gosling"));
         $x("//div[@class='table-responsive']//tbody//tr[2]/td[2]").shouldHave(text("rgosl@gmail.com"));
@@ -63,17 +64,44 @@ public class FormAndTextBoxTests extends TestBase {
     }
 
     @Test
-    void successfulFillAllFieldsEasyFormTest() {
-        open("/text-box");
-        $("[id=userName]").setValue("Alex Black");
-        $("[id=userEmail]").setValue("alex@black.com");
-        $("[id=currentAddress]").setValue("first address 1");
-        $("[id=permanentAddress]").setValue("second address 2");
-        $("[id=submit]").click();
+    void failureFillNoFieldsFormTest() {
+        open("/automation-practice-form");
+        $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
+        $("#submit").click();
 
-        $("[id=output] [id=name]").shouldHave(text("Alex Black"));
-        $("[id=output] [id=email]").shouldHave(text("alex@black.com"));
-        $("[id=output] [id=currentAddress]").shouldHave(text("first address 1"));
-        $("[id=output] [id=permanentAddress]").shouldHave(text("second address 2"));
+        $("#firstName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+        $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+        $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+        $("#gender-radio-1").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+    }
+
+    @Test
+    void failureIncorrectEmailFormattingFormTest() {
+        open("/automation-practice-form");
+        $("#userEmail").setValue("wrong_formatting");
+        $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
+        $("#submit").click();
+
+        $("#userEmail").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+    }
+
+    @Test
+    void failureTooShortPhoneNumberFormTest() {
+        open("/automation-practice-form");
+        $("#userNumber").setValue("123");
+        $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
+        $("#submit").click();
+
+        $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+    }
+
+    @Test
+    void failureUsingNoDigitsInPhoneNumberFormTest() {
+        open("/automation-practice-form");
+        $("#userNumber").setValue("546848468$");
+        $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
+        $("#submit").click();
+
+        $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
     }
 }
