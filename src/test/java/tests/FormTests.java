@@ -3,7 +3,6 @@ package tests;
 import com.codeborne.selenide.ScrollIntoViewOptions;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.text;
@@ -18,18 +17,15 @@ public class FormTests extends TestBase {
         $("#firstName").setValue("Alex");
         $("#lastName").setValue("Black");
         $("#userEmail").setValue("alex@black.com");
-        $("#genterWrapper input[value=Male]").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("5468484684");
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").click();
-        $("option[value='2']").click();
-        $(".react-datepicker__year-select").click();
-        $("option[value='2000']").click();
-        $x("//div[@id='dateOfBirth']//div[.='15']").click();
+        $(".react-datepicker__month-select").$(byText("March")).click();
+        $(".react-datepicker__year-select").$(byText("2000")).click();
+        $(".react-datepicker__day--015:not(.react-datepicker__day--outside-month)").click();
         $("#subjectsInput").setValue("Hindi").pressEnter();
         $x("//div[@id='hobbiesWrapper']//label[.='Sports']").click();
-        File image = new File("src/test/resources/images/toad.webp");
-        $("#uploadPicture").uploadFile(image);
+        $("#uploadPicture").uploadFromClasspath("images/toad.webp");
         $("#currentAddress").setValue("John Doe 123 Elm Street, Apt 4BNew York, NY 10001");
         $("#state").scrollIntoView(ScrollIntoViewOptions.instant()).click();
         $("#state").$(byText("NCR")).click();
@@ -55,14 +51,12 @@ public class FormTests extends TestBase {
         $("#firstName").setValue("Ryan");
         $("#lastName").setValue("Gosling");
         $("#userEmail").setValue("rgosl@gmail.com");
-        $("#genterWrapper input[value=Male]").click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("1122334455");
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").click();
-        $("option[value='10']").click();
-        $(".react-datepicker__year-select").click();
-        $("option[value='1980']").click();
-        $x("//div[@id='dateOfBirth']//div[.='12']").click();
+        $(".react-datepicker__month-select").$(byText("November")).click();
+        $(".react-datepicker__year-select").$(byText("1980")).click();
+        $(".react-datepicker__day--012:not(.react-datepicker__day--outside-month)").click();
         $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
         $("#submit").click();
 
@@ -82,7 +76,7 @@ public class FormTests extends TestBase {
         $("#firstName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
         $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
-        $("#genterWrapper input[value=Male]").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+        $("#genterWrapper input").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
     }
 
     @Test
