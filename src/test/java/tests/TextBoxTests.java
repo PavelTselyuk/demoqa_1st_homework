@@ -8,31 +8,33 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class TextBoxTests extends TestBase{
+public class TextBoxTests extends TestBase {
+
 
     @Test
     void successfulFillAllFieldsTextBoxTest() {
         open("/text-box");
-        $("#userName").setValue("Alex Black");
-        $("#userEmail").setValue("alex@black.com");
-        $("#currentAddress").setValue("first address 1");
-        $("#permanentAddress").setValue("second address 2");
+        $("#userName").setValue(String.format("%s %s", testUserAlex.studentFirstName, testUserAlex.studentLastName));
+        $("#userEmail").setValue(testUserAlex.studentEmail);
+        $("#currentAddress").setValue(String.format("Curr: %s", testUserAlex.address));
+        $("#permanentAddress").setValue(String.format("Perm: %s", testUserAlex.address));
         $("#submit").click();
 
-        $("#output #name").shouldHave(text("Alex Black"));
-        $("#output #email").shouldHave(text("alex@black.com"));
-        $("#output #currentAddress").shouldHave(text("first address 1"));
-        $("#output #permanentAddress").shouldHave(text("second address 2"));
+        $("#output #name")
+                .shouldHave(text(String.format("%s %s", testUserAlex.studentFirstName, testUserAlex.studentLastName)));
+        $("#output #email").shouldHave(text(testUserAlex.studentEmail));
+        $("#output #currentAddress").shouldHave(text(String.format("Curr: %s", testUserAlex.address)));
+        $("#output #permanentAddress").shouldHave(text(String.format("Perm: %s", testUserAlex.address)));
     }
 
 
     @Test
     void failureIncorrectEmailFormattingFormTest() {
         open("/text-box");
-        $("#userEmail").setValue("wrong_formatting");
+        $("#userEmail").setValue(wrongFormattedEmail);
         $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
         $("#submit").click();
 
-        $("#userEmail").shouldHave(cssValue("border-color", "rgb(255, 0, 0)"));
+        $("#userEmail").shouldHave(cssValue("border-color", incorrectInputTextColorTextBoxTest));
     }
 }
