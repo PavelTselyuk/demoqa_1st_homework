@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static testData.TestData.*;
 
 public class TextBoxTests extends TestBase {
 
