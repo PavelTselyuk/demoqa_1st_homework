@@ -32,10 +32,10 @@ public class TextBoxTests extends TestBase {
     @Test
     void failureIncorrectEmailFormattingFormTest() {
         open("/text-box");
-        $("#userEmail").setValue(wrongFormattedEmail);
+        $("#userEmail").setValue(WRONG_FORMATTED_EMAIL);
         $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
         $("#submit").click();
 
-        $("#userEmail").shouldHave(cssValue("border-color", incorrectInputTextColorTextBoxTest));
+        $("#userEmail").shouldHave(cssValue("border-color", INCORRECT_INPUT_TEXT_COLOR_TEXT_BOX_TEST));
     }
 }

@@ -93,39 +93,39 @@ public class FormTests extends TestBase {
         $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
         $("#submit").click();
 
-        $("#firstName").shouldHave(cssValue("border-color", incorrectInputTextColorFormTest));
-        $("#lastName").shouldHave(cssValue("border-color", incorrectInputTextColorFormTest));
-        $("#userNumber").shouldHave(cssValue("border-color", incorrectInputTextColorFormTest));
-        $("#genterWrapper input").shouldHave(cssValue("border-color", incorrectInputTextColorFormTest));
+        $("#firstName").shouldHave(cssValue("border-color", INCORRECT_INPUT_TEXT_COLOR_FORM_TEST));
+        $("#lastName").shouldHave(cssValue("border-color", INCORRECT_INPUT_TEXT_COLOR_FORM_TEST));
+        $("#userNumber").shouldHave(cssValue("border-color", INCORRECT_INPUT_TEXT_COLOR_FORM_TEST));
+        $("#genterWrapper input").shouldHave(cssValue("border-color", INCORRECT_INPUT_TEXT_COLOR_FORM_TEST));
     }
 
     @Test
     void failureIncorrectEmailFormattingFormTest() {
         open("/automation-practice-form");
-        $("#userEmail").setValue(wrongFormattedEmail);
+        $("#userEmail").setValue(WRONG_FORMATTED_EMAIL);
         $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
         $("#submit").click();
 
-        $("#userEmail").shouldHave(cssValue("border-color", incorrectInputTextColorFormTest));
+        $("#userEmail").shouldHave(cssValue("border-color", INCORRECT_INPUT_TEXT_COLOR_FORM_TEST));
     }
 
     @Test
     void failureTooShortPhoneNumberFormTest() {
         open("/automation-practice-form");
-        $("#userNumber").setValue(tooShortPhoneNumber);
+        $("#userNumber").setValue(TOO_SHORT_PHONE_NUMBER);
         $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
         $("#submit").click();
 
-        $("#userNumber").shouldHave(cssValue("border-color", incorrectInputTextColorFormTest));
+        $("#userNumber").shouldHave(cssValue("border-color", INCORRECT_INPUT_TEXT_COLOR_FORM_TEST));
     }
 
     @Test
     void failureUsingNoDigitsInPhoneNumberFormTest() {
         open("/automation-practice-form");
-        $("#userNumber").setValue(phoneNumberWithNotAllowedSymbol);
+        $("#userNumber").setValue(PHONE_NUMBER_WITH_NOT_ALLOWED_SYMBOL);
         $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
         $("#submit").click();
 
-        $("#userNumber").shouldHave(cssValue("border-color", incorrectInputTextColorFormTest));
+        $("#userNumber").shouldHave(cssValue("border-color", INCORRECT_INPUT_TEXT_COLOR_FORM_TEST));
     }
 }

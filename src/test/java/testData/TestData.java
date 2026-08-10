@@ -32,9 +32,9 @@ public class TestData {
             .yearOfBirth("1980")
             .build();
 
-    public static String incorrectInputTextColorFormTest = "rgb(220, 53, 69)";
-    public static String incorrectInputTextColorTextBoxTest = "rgb(255, 0, 0)";
-    public static String wrongFormattedEmail = "wrong_formatting";
-    public static String tooShortPhoneNumber = "123";
-    public static String phoneNumberWithNotAllowedSymbol = "546848468$";
+    public static final String INCORRECT_INPUT_TEXT_COLOR_FORM_TEST = "rgb(220, 53, 69)";
+    public static final String INCORRECT_INPUT_TEXT_COLOR_TEXT_BOX_TEST = "rgb(255, 0, 0)";
+    public static final String WRONG_FORMATTED_EMAIL = "wrong_formatting";
+    public static final String TOO_SHORT_PHONE_NUMBER = "123";
+    public static final String PHONE_NUMBER_WITH_NOT_ALLOWED_SYMBOL = "546848468$";
 }
