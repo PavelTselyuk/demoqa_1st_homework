@@ -1,12 +1,7 @@
 package tests;
 
-import com.codeborne.selenide.ScrollIntoViewOptions;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.cssValue;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 import static testData.TestData.*;
 
 public class TextBoxTests extends TestBase {
@@ -14,28 +9,31 @@ public class TextBoxTests extends TestBase {
 
     @Test
     void successfulFillAllFieldsTextBoxTest() {
-        open("/text-box");
-        $("#userName").setValue(String.format("%s %s", testUserAlex.studentFirstName, testUserAlex.studentLastName));
-        $("#userEmail").setValue(testUserAlex.studentEmail);
-        $("#currentAddress").setValue(String.format("Curr: %s", testUserAlex.address));
-        $("#permanentAddress").setValue(String.format("Perm: %s", testUserAlex.address));
-        $("#submit").click();
+        textBoxPage
+                .openPage()
+                .typeUserName(String.format("%s %s", testUserAlex.studentFirstName, testUserAlex.studentLastName))
+                .typeUserEmail(testUserAlex.studentEmail)
+                .typeCurrentAddress(String.format("Current: %s", testUserAlex.address))
+                .typePermanentAddress(String.format("Permanent: %s", testUserAlex.address))
+                .submitForm();
 
-        $("#output #name")
-                .shouldHave(text(String.format("%s %s", testUserAlex.studentFirstName, testUserAlex.studentLastName)));
-        $("#output #email").shouldHave(text(testUserAlex.studentEmail));
-        $("#output #currentAddress").shouldHave(text(String.format("Curr: %s", testUserAlex.address)));
-        $("#output #permanentAddress").shouldHave(text(String.format("Perm: %s", testUserAlex.address)));
+        textBoxPage
+                .checkFieldById("name", String.format("%s %s", testUserAlex.studentFirstName, testUserAlex.studentLastName))
+                .checkFieldById("email", testUserAlex.studentEmail)
+                .checkFieldById("currentAddress", String.format("Current: %s", testUserAlex.address))
+                .checkFieldById("permanentAddress", String.format("Permanent: %s", testUserAlex.address));
     }
 
 
     @Test
     void failureIncorrectEmailFormattingFormTest() {
-        open("/text-box");
-        $("#userEmail").setValue(WRONG_FORMATTED_EMAIL);
-        $("#submit").scrollIntoView(ScrollIntoViewOptions.instant());
-        $("#submit").click();
+        textBoxPage
+                .openPage()
+                .typeUserEmail(WRONG_FORMATTED_EMAIL)
+                .submitForm();
 
-        $("#userEmail").shouldHave(cssValue("border-color", INCORRECT_INPUT_TEXT_COLOR_TEXT_BOX_TEST));
+        textBoxPage
+                .borderOfElemShouldBeColor(textBoxPage.getUserEmailInput(), INCORRECT_INPUT_TEXT_COLOR_TEXT_BOX_TEST);
+
     }
 }
