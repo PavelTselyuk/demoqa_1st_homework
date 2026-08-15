@@ -1,72 +1,78 @@
 package tests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static testData.TestData.*;
 
 public class FormTests extends TestBase {
 
+    @BeforeEach
+    void prepareRandomData() {
+        testUser = getTestUser();
+    }
+
     @Test
     void successfulFillAllFieldsFormTest() {
         registrationPage
                 .openPage()
-                .typeFirstName(testUserAlex.studentFirstName)
-                .typeLastName(testUserAlex.studentLastName)
-                .typeEmail(testUserAlex.studentEmail)
-                .setGender(testUserAlex.gender)
-                .typeNumber(testUserAlex.phoneNumber)
+                .typeFirstName(testUser.studentFirstName)
+                .typeLastName(testUser.studentLastName)
+                .typeEmail(testUser.studentEmail)
+                .setGender(testUser.gender)
+                .typeNumber(testUser.phoneNumber)
                 .setDateOfBirth(
-                        testUserAlex.dayOfBirth,
-                        testUserAlex.monthOfBirth,
-                        testUserAlex.yearOfBirth)
-                .typeSubjects(testUserAlex.subjects)
-                .setHobbies(testUserAlex.hobbies)
-                .uploadPicture(testUserAlex.picture)
-                .typeCurrentAddress(testUserAlex.address)
-                .setStateAndCity(testUserAlex.state, testUserAlex.city)
+                        testUser.dayOfBirth,
+                        testUser.monthOfBirth,
+                        testUser.yearOfBirth)
+                .typeSubjects(testUser.subjects)
+                .setHobbies(testUser.hobbies)
+                .uploadPicture(testUser.picture)
+                .typeCurrentAddress(testUser.address)
+                .setStateAndCity(testUser.state, testUser.city)
                 .pressSubmitButton();
 
         registrationPage
-                .checkResult("Student Name", String.format("%s %s", testUserAlex.studentFirstName, testUserAlex.studentLastName))
-                .checkResult("Student Email", testUserAlex.studentEmail)
-                .checkResult("Gender", testUserAlex.gender)
-                .checkResult("Mobile", testUserAlex.phoneNumber)
+                .checkResult("Student Name", String.format("%s %s", testUser.studentFirstName, testUser.studentLastName))
+                .checkResult("Student Email", testUser.studentEmail)
+                .checkResult("Gender", testUser.gender)
+                .checkResult("Mobile", testUser.phoneNumber)
                 .checkResult(
                         "Date of Birth",
                         String.format(
-                                "%d %s,%s", testUserAlex.dayOfBirth, testUserAlex.monthOfBirth, testUserAlex.yearOfBirth
+                                "%d %s,%s", testUser.dayOfBirth, testUser.monthOfBirth, testUser.yearOfBirth
                         ))
-                .checkResult("Subjects", testUserAlex.subjects)
-                .checkResult("Hobbies", testUserAlex.hobbies)
-                .checkResult("Picture", testUserAlex.picture)
-                .checkResult("Address", testUserAlex.address)
-                .checkResult("State and City", String.format("%s %s", testUserAlex.state, testUserAlex.city));
+                .checkResult("Subjects", testUser.subjects)
+                .checkResult("Hobbies", testUser.hobbies)
+                .checkResult("Picture", testUser.picture)
+                .checkResult("Address", testUser.address)
+                .checkResult("State and City", String.format("%s %s", testUser.state, testUser.city));
     }
 
     @Test
     void successfulFillRequiredFieldsCFormTest() {
         registrationPage
                 .openPage()
-                .typeFirstName(testUserRyan.studentFirstName)
-                .typeLastName(testUserRyan.studentLastName)
-                .typeEmail(testUserRyan.studentEmail)
-                .setGender(testUserRyan.gender)
-                .typeNumber(testUserRyan.phoneNumber)
+                .typeFirstName(testUser.studentFirstName)
+                .typeLastName(testUser.studentLastName)
+                .typeEmail(testUser.studentEmail)
+                .setGender(testUser.gender)
+                .typeNumber(testUser.phoneNumber)
                 .setDateOfBirth(
-                        testUserRyan.dayOfBirth,
-                        testUserRyan.monthOfBirth,
-                        testUserRyan.yearOfBirth)
+                        testUser.dayOfBirth,
+                        testUser.monthOfBirth,
+                        testUser.yearOfBirth)
                 .pressSubmitButton();
 
         registrationPage
-                .checkResult("Student Name", String.format("%s %s", testUserRyan.studentFirstName, testUserRyan.studentLastName))
-                .checkResult("Student Email", testUserRyan.studentEmail)
-                .checkResult("Gender", testUserRyan.gender)
-                .checkResult("Mobile", testUserRyan.phoneNumber)
+                .checkResult("Student Name", String.format("%s %s", testUser.studentFirstName, testUser.studentLastName))
+                .checkResult("Student Email", testUser.studentEmail)
+                .checkResult("Gender", testUser.gender)
+                .checkResult("Mobile", testUser.phoneNumber)
                 .checkResult(
                         "Date of Birth",
                         String.format(
-                                "%d %s,%s", testUserRyan.dayOfBirth, testUserRyan.monthOfBirth, testUserRyan.yearOfBirth
+                                "%d %s,%s", testUser.dayOfBirth, testUser.monthOfBirth, testUser.yearOfBirth
                         ));
     }
 

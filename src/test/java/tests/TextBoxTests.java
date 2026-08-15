@@ -1,5 +1,6 @@
 package tests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static testData.TestData.*;
@@ -7,21 +8,26 @@ import static testData.TestData.*;
 public class TextBoxTests extends TestBase {
 
 
+    @BeforeEach
+    void prepareRandomData() {
+        testUser = getTestUser();
+    }
+
     @Test
     void successfulFillAllFieldsTextBoxTest() {
         textBoxPage
                 .openPage()
-                .typeUserName(String.format("%s %s", testUserAlex.studentFirstName, testUserAlex.studentLastName))
-                .typeUserEmail(testUserAlex.studentEmail)
-                .typeCurrentAddress(String.format("Current: %s", testUserAlex.address))
-                .typePermanentAddress(String.format("Permanent: %s", testUserAlex.address))
+                .typeUserName(String.format("%s %s", testUser.studentFirstName, testUser.studentLastName))
+                .typeUserEmail(testUser.studentEmail)
+                .typeCurrentAddress(String.format("Current: %s", testUser.address))
+                .typePermanentAddress(String.format("Permanent: %s", testUser.address))
                 .submitForm();
 
         textBoxPage
-                .checkFieldById("name", String.format("%s %s", testUserAlex.studentFirstName, testUserAlex.studentLastName))
-                .checkFieldById("email", testUserAlex.studentEmail)
-                .checkFieldById("currentAddress", String.format("Current: %s", testUserAlex.address))
-                .checkFieldById("permanentAddress", String.format("Permanent: %s", testUserAlex.address));
+                .checkFieldById("name", String.format("%s %s", testUser.studentFirstName, testUser.studentLastName))
+                .checkFieldById("email", testUser.studentEmail)
+                .checkFieldById("currentAddress", String.format("Current: %s", testUser.address))
+                .checkFieldById("permanentAddress", String.format("Permanent: %s", testUser.address));
     }
 
 

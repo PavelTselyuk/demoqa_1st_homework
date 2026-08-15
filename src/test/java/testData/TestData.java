@@ -1,36 +1,64 @@
 package testData;
 
 import entities.User;
+import net.datafaker.Faker;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.Map;
 
 public class TestData {
 
-    public static User testUserAlex = new User.UserBuilder()
-            .studentFirstName("Alex")
-            .studentLastName("Black")
-            .studentEmail("alex@black.com")
-            .gender("Male")
-            .phoneNumber("5468484684")
-            .dayOfBirth(15)
-            .monthOfBirth("March")
-            .yearOfBirth("2000")
-            .subjects("Hindi")
-            .hobbies("Sports")
-            .picture("toad.webp")
-            .address("John Doe 123 Elm Street, Apt 4BNew York, NY 10001")
-            .state("NCR")
-            .city("Delhi")
-            .build();
+    //    private static final Faker faker = new Faker();
+    private static final Faker faker = new Faker();
 
-    public static User testUserRyan = new User.UserBuilder()
-            .studentFirstName("Ryan")
-            .studentLastName("Gosling")
-            .studentEmail("rgosl@gmail.com")
-            .gender("Male")
-            .phoneNumber("1122334455")
-            .dayOfBirth(12)
-            .monthOfBirth("November")
-            .yearOfBirth("1980")
-            .build();
+
+    private static String[] randomDayMonthYear;
+
+    private static String[] getRandomDayMonthYear() {
+        LocalDate birthday = faker.timeAndDate().birthday();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
+        randomDayMonthYear = birthday.format(formatter).split(" ");
+        return randomDayMonthYear;
+    }
+
+    private static final Map<String, String[]> statesAndCities = Map.of(
+            "NCR", new String[]{"Delhi", "Gurgaon", "Noida"},
+            "Uttar Pradesh", new String[]{"Agra", "Lucknow", "Merrut"},
+            "Haryana", new String[]{"Karnal", "Panipat"},
+            "Rajasthan", new String[]{"Jaipur", "Jaiselmer"}
+    );
+
+    private static String state;
+
+    private static String getState() {
+        state = faker.options().option(statesAndCities.keySet().toArray(new String[0]));
+        return state;
+    }
+
+    private static String getCity() {
+        return faker.options().option(statesAndCities.get(state));
+    }
+
+    public static User getTestUser() {
+        return new User.UserBuilder()
+                .studentFirstName(faker.name().firstName())
+                .studentLastName(faker.name().lastName())
+                .studentEmail(faker.internet().emailAddress())
+                .gender(faker.options().option("Male", "Female", "Other"))
+                .phoneNumber(faker.expression("#{numerify '##########'}"))
+                .dayOfBirth(Integer.parseInt(getRandomDayMonthYear()[0]))
+                .monthOfBirth(randomDayMonthYear[1])
+                .yearOfBirth(randomDayMonthYear[2])
+                .subjects(faker.options().option("Physics", "Chemistry", "Hindi", "English", "Biology", "Maths", "Computer Science"))
+                .hobbies(faker.options().option("Sports", "Reading", "Music"))
+                .picture("toad.webp")
+                .address(faker.address().fullAddress())
+                .state(getState())
+                .city(getCity())
+                .build();
+    }
 
     public static final String INCORRECT_INPUT_TEXT_COLOR_FORM_TEST = "rgb(220, 53, 69)";
     public static final String INCORRECT_INPUT_TEXT_COLOR_TEXT_BOX_TEST = "rgb(255, 0, 0)";
