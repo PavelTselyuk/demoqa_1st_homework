@@ -55,10 +55,7 @@ public class RegistrationPage {
     public RegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        executeJavaScript("document.getElementById('fixedban')?.remove();");
-        executeJavaScript("document.getElementById('footer')?.remove();");
-//        executeJavaScript("$('#fixedban').remove()");
-//        executeJavaScript("$('footer').remove()");
+        removeUnnecessaryElements();
         return this;
     }
 
@@ -148,5 +145,10 @@ public class RegistrationPage {
     public RegistrationPage borderOfElemShouldBeColor(SelenideElement element, String color) {
         element.shouldHave(cssValue("border-color", color));
         return this;
+    }
+
+    private void removeUnnecessaryElements() {
+        executeJavaScript("document.getElementById('fixedban')?.remove();");
+        executeJavaScript("document.getElementById('footer')?.remove();");
     }
 }
