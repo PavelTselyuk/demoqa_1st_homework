@@ -11,12 +11,12 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxPage {
     // Elements
-    private SelenideElement userNameInput = $("#userName");
-    private SelenideElement userEmailInput = $("#userEmail");
-    private SelenideElement currentAddressInput = $("#currentAddress");
-    private SelenideElement permanentAddressInput = $("#permanentAddress");
-    private SelenideElement submitButton = $("#submit");
-    private SelenideElement outputResults = $("#output");
+    private final SelenideElement userNameInput = $("#userName");
+    private final SelenideElement userEmailInput = $("#userEmail");
+    private final SelenideElement currentAddressInput = $("#currentAddress");
+    private final SelenideElement permanentAddressInput = $("#permanentAddress");
+    private final SelenideElement submitButton = $("#submit");
+    private final SelenideElement outputResults = $("#output");
 
     public SelenideElement getUserEmailInput() {
         return userEmailInput;
