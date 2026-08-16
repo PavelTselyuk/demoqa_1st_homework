@@ -10,6 +10,7 @@ public class FormTests extends TestBase {
     void successfulFillAllFieldsFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeFirstName(testUserAlex.studentFirstName)
                 .typeLastName(testUserAlex.studentLastName)
                 .typeEmail(testUserAlex.studentEmail)
@@ -47,6 +48,7 @@ public class FormTests extends TestBase {
     void successfulFillRequiredFieldsCFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeFirstName(testUserRyan.studentFirstName)
                 .typeLastName(testUserRyan.studentLastName)
                 .typeEmail(testUserRyan.studentEmail)
@@ -74,6 +76,7 @@ public class FormTests extends TestBase {
     void failureFillNoFieldsFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .pressSubmitButton();
 
         registrationPage
@@ -88,6 +91,7 @@ public class FormTests extends TestBase {
     void failureIncorrectEmailFormattingFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeEmail(WRONG_FORMATTED_EMAIL)
                 .pressSubmitButton();
 
@@ -99,6 +103,7 @@ public class FormTests extends TestBase {
     void failureTooShortPhoneNumberFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeNumber(TOO_SHORT_PHONE_NUMBER)
                 .pressSubmitButton();
 
@@ -110,6 +115,7 @@ public class FormTests extends TestBase {
     void failureUsingNoDigitsInPhoneNumberFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeNumber(PHONE_NUMBER_WITH_NOT_ALLOWED_SYMBOL)
                 .pressSubmitButton();
 
