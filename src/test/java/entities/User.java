@@ -129,4 +129,24 @@ public class User {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "studentFirstName='" + studentFirstName + '\'' +
+                ", studentLastName='" + studentLastName + '\'' +
+                ", studentEmail='" + studentEmail + '\'' +
+                ", gender='" + gender + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dayOfBirth=" + dayOfBirth +
+                ", monthOfBirth='" + monthOfBirth + '\'' +
+                ", yearOfBirth='" + yearOfBirth + '\'' +
+                ", subjects='" + subjects + '\'' +
+                ", hobbies='" + hobbies + '\'' +
+                ", picture='" + picture + '\'' +
+                ", address='" + address + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }

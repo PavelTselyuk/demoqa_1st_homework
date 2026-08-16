@@ -2,6 +2,7 @@ package tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import testData.TestData;
 
 import static testData.TestData.*;
 
@@ -10,7 +11,7 @@ public class TextBoxTests extends TestBase {
 
     @BeforeEach
     void prepareRandomData() {
-        testUser = getTestUser();
+        testUser = new TestData().getTestUser();
     }
 
     @Test

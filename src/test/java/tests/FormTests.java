@@ -2,6 +2,7 @@ package tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import testData.TestData;
 
 import static testData.TestData.*;
 
@@ -9,13 +10,15 @@ public class FormTests extends TestBase {
 
     @BeforeEach
     void prepareRandomData() {
-        testUser = getTestUser();
+        testUser = new TestData().getTestUser();
+        System.out.println(testUser);
     }
 
     @Test
     void successfulFillAllFieldsFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeFirstName(testUser.studentFirstName)
                 .typeLastName(testUser.studentLastName)
                 .typeEmail(testUser.studentEmail)
@@ -53,6 +56,7 @@ public class FormTests extends TestBase {
     void successfulFillRequiredFieldsCFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeFirstName(testUser.studentFirstName)
                 .typeLastName(testUser.studentLastName)
                 .typeEmail(testUser.studentEmail)
@@ -80,6 +84,7 @@ public class FormTests extends TestBase {
     void failureFillNoFieldsFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .pressSubmitButton();
 
         registrationPage
@@ -94,6 +99,7 @@ public class FormTests extends TestBase {
     void failureIncorrectEmailFormattingFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeEmail(WRONG_FORMATTED_EMAIL)
                 .pressSubmitButton();
 
@@ -105,6 +111,7 @@ public class FormTests extends TestBase {
     void failureTooShortPhoneNumberFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeNumber(TOO_SHORT_PHONE_NUMBER)
                 .pressSubmitButton();
 
@@ -116,6 +123,7 @@ public class FormTests extends TestBase {
     void failureUsingNoDigitsInPhoneNumberFormTest() {
         registrationPage
                 .openPage()
+                .removeUnnecessaryElements()
                 .typeNumber(PHONE_NUMBER_WITH_NOT_ALLOWED_SYMBOL)
                 .pressSubmitButton();
 

@@ -11,12 +11,12 @@ import java.util.Map;
 public class TestData {
 
     //    private static final Faker faker = new Faker();
-    private static final Faker faker = new Faker();
+    private final Faker faker = new Faker();
 
 
-    private static String[] randomDayMonthYear;
+    private String[] randomDayMonthYear;
 
-    private static String[] getRandomDayMonthYear() {
+    private String[] getRandomDayMonthYear() {
         LocalDate birthday = faker.timeAndDate().birthday();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
         randomDayMonthYear = birthday.format(formatter).split(" ");
@@ -30,18 +30,18 @@ public class TestData {
             "Rajasthan", new String[]{"Jaipur", "Jaiselmer"}
     );
 
-    private static String state;
+    private String state;
 
-    private static String getState() {
+    private String getState() {
         state = faker.options().option(statesAndCities.keySet().toArray(new String[0]));
         return state;
     }
 
-    private static String getCity() {
+    private String getCity() {
         return faker.options().option(statesAndCities.get(state));
     }
 
-    public static User getTestUser() {
+    public User getTestUser() {
         return new User.UserBuilder()
                 .studentFirstName(faker.name().firstName())
                 .studentLastName(faker.name().lastName())

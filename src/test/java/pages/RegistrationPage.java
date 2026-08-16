@@ -55,7 +55,6 @@ public class RegistrationPage {
     public RegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        removeUnnecessaryElements();
         return this;
     }
 
@@ -147,8 +146,9 @@ public class RegistrationPage {
         return this;
     }
 
-    private void removeUnnecessaryElements() {
+    public RegistrationPage removeUnnecessaryElements() {
         executeJavaScript("document.getElementById('fixedban')?.remove();");
         executeJavaScript("document.getElementById('footer')?.remove();");
+        return this;
     }
 }
