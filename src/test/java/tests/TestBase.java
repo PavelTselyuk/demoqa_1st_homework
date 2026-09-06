@@ -21,21 +21,21 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Properties props = new Properties();
-        try (InputStream input = Main.class.getClassLoader().getResourceAsStream("config.properties")) {
-            if (input == null) {
-                System.out.println("Файл не найден");
-                return;
-            }
-            props.load(input);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        String url = String.format(
-                "https://%s:%s@selenoid.autotests.cloud/wd/hub",
-                props.getProperty("login"),
-                props.getProperty("password")
-        );
+//        Properties props = new Properties();
+//        try (InputStream input = Main.class.getClassLoader().getResourceAsStream("config.properties")) {
+//            if (input == null) {
+//                System.out.println("Файл не найден");
+//                return;
+//            }
+//            props.load(input);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//        String url = String.format(
+//                "https://%s:%s@selenoid.autotests.cloud/wd/hub",
+//                props.getProperty("login"),
+//                props.getProperty("password")
+//        );
 
         Configuration.browser = "chrome";
 //        Configuration.browserVersion = "144.0";
