@@ -1,9 +1,25 @@
 plugins {
     id 'java-library'
+    id 'io.qameta.allure' version '3.0.2'
 }
 
 repositories {
     mavenCentral()
+}
+
+
+allure {
+    report {
+        version.set("2.35.1")
+    }
+    adapter { // отвечает за появление папочки build/allure-results
+        aspectjWeaver.set(true) //обработка аннотации @Step
+        frameworks {
+            junit5 { //название фреймворка
+                adapterVersion.set("2.35.1") //версия интеграции фреймворка и Allure
+            }
+        }
+    }
 }
 
 dependencies {
@@ -16,12 +32,13 @@ dependencies {
     testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.14.2")
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
-test {
+tasks.withType(Test) {
     useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
 }
-
-
