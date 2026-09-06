@@ -8,6 +8,8 @@ repositories {
 
 dependencies {
     testImplementation("com.codeborne:selenide:7.14.0")
+    testImplementation("io.qameta.allure:allure-selenide:2.32.0")
+    testImplementation( "org.slf4j:slf4j-simple:2.0.17")
     testImplementation("org.junit.jupiter:junit-jupiter:5.14.2")
 
     testRuntimeOnly ("org.junit.platform:junit-platform-launcher")
