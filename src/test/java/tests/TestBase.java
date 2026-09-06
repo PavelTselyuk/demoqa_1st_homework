@@ -1,15 +1,19 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import com.sun.tools.javac.Main;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.Attach;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.RegistrationPage;
 import pages.TextBoxPage;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import java.util.List;
+import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
@@ -18,24 +22,13 @@ public class TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
     TextBoxPage textBoxPage = new TextBoxPage();
 
+    @BeforeEach
+    void addListener() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
 
     @BeforeAll
     static void beforeAll() {
-//        Properties props = new Properties();
-//        try (InputStream input = Main.class.getClassLoader().getResourceAsStream("config.properties")) {
-//            if (input == null) {
-//                System.out.println("Файл не найден");
-//                return;
-//            }
-//            props.load(input);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//        String url = String.format(
-//                "https://%s:%s@selenoid.autotests.cloud/wd/hub",
-//                props.getProperty("login"),
-//                props.getProperty("password")
-//        );
 
         Configuration.browser = "chrome";
 //        Configuration.browserVersion = "144.0";
@@ -43,13 +36,26 @@ public class TestBase {
         Configuration.baseUrl = "https://demoqa.com";
 //        Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000; // default 4000
-//        Configuration.remote = url;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments(List.of("--disable-dev-shm-usage", "--no-sandbox"));
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
+//        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
     @AfterEach
-    void afterEach() {
+    void tearDown() {
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
         closeWebDriver();
     }
-
 }
+
