@@ -33,8 +33,8 @@ public class TestBase {
         String password = System.getProperty("password");
         String selenoidAddress = System.getProperty("selenoidAddress");
         Configuration.browser = System.getProperty("browser");
-//        Configuration.browserVersion = "144.0";
-        Configuration.browserSize = "1920x1080";
+        Configuration.browserVersion = System.getProperty("browserVersion");
+        Configuration.browserSize = System.getProperty("browserSize");
         Configuration.baseUrl = System.getProperty("baseUrl");
 //        Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000; // default 4000
