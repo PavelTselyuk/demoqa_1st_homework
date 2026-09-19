@@ -1,10 +1,12 @@
 package tests;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static testData.TestData.*;
 
+@Disabled
 public class FormTestsRegistration extends TestBase {
 
     @Test

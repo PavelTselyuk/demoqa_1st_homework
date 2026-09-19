@@ -29,13 +29,13 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        String login = System.getProperty("login");
-        String password = System.getProperty("password");
-        String selenoidAddress = System.getProperty("selenoidAddress");
-        Configuration.browser = System.getProperty("browser");
-        Configuration.browserVersion = System.getProperty("browserVersion");
-        Configuration.browserSize = System.getProperty("browserSize");
-        Configuration.baseUrl = System.getProperty("baseUrl");
+//        String login = System.getProperty("login");
+//        String password = System.getProperty("password");
+//        String selenoidAddress = System.getProperty("selenoidAddress");
+//        Configuration.browser = System.getProperty("browser");
+//        Configuration.browserVersion = System.getProperty("browserVersion");
+//        Configuration.browserSize = System.getProperty("browserSize");
+//        Configuration.baseUrl = System.getProperty("baseUrl");
 //        Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000; // default 4000
 
@@ -48,7 +48,7 @@ public class TestBase {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = String.format("https://%s:%s@%s",login, password, selenoidAddress); //  selenoid.autotests.cloud/wd/hub
+//        Configuration.remote = String.format("https://%s:%s@%s",login, password, selenoidAddress); //  selenoid.autotests.cloud/wd/hub
     }
 
     @AfterEach
