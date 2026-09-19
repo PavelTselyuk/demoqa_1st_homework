@@ -6,4 +6,4 @@
 /gradlew.bat
 /src/test/resources/config.properties
 /notifications/draft.txt
-/notifications/config.json
+/notifications/telegram.json
