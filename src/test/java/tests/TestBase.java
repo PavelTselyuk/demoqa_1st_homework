@@ -39,15 +39,15 @@ public class TestBase {
 //        Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000; // default 4000
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments(List.of("--disable-dev-shm-usage", "--no-sandbox"));
-        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        chromeOptions.addArguments(List.of("--disable-dev-shm-usage", "--no-sandbox"));
+//        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+//        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+//                "enableVNC", true,
+//                "enableVideo", true
+//        ));
+//        Configuration.browserCapabilities = capabilities;
 //        Configuration.remote = String.format("https://%s:%s@%s",login, password, selenoidAddress); //  selenoid.autotests.cloud/wd/hub
     }
 
