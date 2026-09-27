@@ -141,4 +141,29 @@ public class RegistrationPage {
         executeJavaScript("document.getElementById('footer')?.remove();");
         return this;
     }
+
+    public SelenideElement getFirstNameInput() {
+        return firstNameInput;
+    }
+
+    public SelenideElement getLastNameInput() {
+        return lastNameInput;
+    }
+
+    public SelenideElement getGenderInput() {
+        return genderContainer.$("input");
+    }
+
+    public SelenideElement getUserEmailInput() {
+        return userEmailInput;
+    }
+
+    public SelenideElement getUserNumberInput() {
+        return userNumberInput;
+    }
+
+    public RegistrationPage borderOfElemShouldBeColor(SelenideElement element, String color) {
+        element.shouldHave(cssValue("border-color", color));
+        return this;
+    }
 }
