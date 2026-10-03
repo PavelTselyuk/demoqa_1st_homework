@@ -32,13 +32,16 @@ public class TestBase {
         String login = System.getProperty("login");
         String password = System.getProperty("password");
         String selenoidAddress = System.getProperty("selenoidAddress");
-        Configuration.browser = System.getProperty("browser");
+        Configuration.browser =  System.getProperty("browser");
         Configuration.browserVersion = System.getProperty("browserVersion");
         Configuration.browserSize = System.getProperty("browserSize");
-        Configuration.baseUrl = System.getProperty("baseUrl");
+        Configuration.baseUrl =  System.getProperty("baseUrl");
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000; // default 4000
 
+//        Configuration.browser = "chrome";
+//        Configuration.baseUrl = "https://demoqa.com";
+//
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments(List.of("--disable-dev-shm-usage", "--no-sandbox"));

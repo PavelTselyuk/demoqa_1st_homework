@@ -1,6 +1,7 @@
 
 package pages;
 
+import com.codeborne.selenide.ScrollIntoViewOptions;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.cssValue;
@@ -49,6 +50,7 @@ public class TextBoxPage {
     }
 
     public void submitForm() {
+        submitButton.scrollIntoView(ScrollIntoViewOptions.instant());
         submitButton.click();
     }
 
