@@ -9,8 +9,10 @@ repositories {
 dependencies {
     testImplementation(
             "com.codeborne:selenide:7.14.0",
-            "org.junit.jupiter:junit-jupiter:5.14.2"
+            "org.junit.jupiter:junit-jupiter:5.14.2",
+            'org.aeonbits.owner:owner:1.0.4',
     )
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.withType(JavaCompile) {
@@ -19,4 +21,5 @@ tasks.withType(JavaCompile) {
 
 test {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
 }
