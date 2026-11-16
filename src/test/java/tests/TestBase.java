@@ -27,7 +27,7 @@ public class TestBase {
         Configuration.browserSize = "1920x1080";
         Configuration.browserVersion = config.getBrowserVersion();
 
-        if ("selenoid".equals(env)) {
+        if ("remote".equals(env)) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments(List.of("--disable-dev-shm-usage", "--no-sandbox"));
