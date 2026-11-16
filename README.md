@@ -6,4 +6,4 @@
 ---
 ## remote run:
 `./gradlew clean test -Denv=remote`  
-(также нужно добавить в папку resources файл config.properties с правильными credentials(по примеру config.properties)
+(также нужно добавить в папку resources файл config.properties с правильными credentials(по примеру config.properties.example)
